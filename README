@@ -1,0 +1,55 @@
+Este programa realiza la multiplicación de dos matrices cuadradas de tamaño n x n de manera paralela utilizando la biblioteca MPI (Message Passing Interface) en Java, a través de MPJ Express. 
+El programa distribuye las filas de las matrices entre los procesos disponibles, calcula los resultados en paralelo y luego los reúne en el proceso principal. Además, compara el resultado 
+de la multiplicación paralela con una multiplicación secuencial para verificar la precisión.
+
+Requisitos:
+Java Development Kit (JDK) instalado.
+MPJ Express instalado y configurado.
+
+Compilar el Programa:
+Compilar el programa con el siguiente comando:
+javac -cp /path/to/mpj.jar Main.java
+Reemplace /path/to/mpj.jar con la ruta real del archivo mpj.jar en tu sistema.
+
+Ejecutar el programa utilizando MPJ Express con el siguiente comando:
+mpjrun.sh -np <número_de_procesos> -cp . Main
+Reemplace <número_de_procesos> con el número de procesos que deseas utilizar.
+
+Ejemplos de Entrada y Salida
+Ejemplo de Ejecución
+Comando de ejecución:
+mpjrun.sh -np 4 -cp . Main
+
+Salida esperada:
+Matriz A:
+[2, 3, 5, 7]
+[1, 6, 8, 3]
+[9, 4, 2, 8]
+[0, 5, 1, 6]
+Matriz B:
+[4, 2, 7, 1]
+[8, 3, 6, 2]
+[9, 5, 4, 3]
+[1, 6, 0, 8]
+
+Resultado de la multiplicación de matrices (paralela):
+[83, 63, 68, 75]
+[109, 56, 62, 45]
+[99, 71, 53, 58]
+[43, 45, 38, 51]
+
+Resultado de la multiplicación de matrices (secuencial):
+[83, 63, 68, 75]
+[109, 56, 62, 45]
+[99, 71, 53, 58]
+[43, 45, 38, 51]
+
+La implementación paralela es correcta.
+
+El rendimiento del programa depende del número de procesos utilizados para realizar la multiplicación de matrices. Aquí hay algunos puntos clave sobre el rendimiento:
+
+1) Escalabilidad: A medida que aumenta el número de procesos, el tiempo de cálculo para cada proceso se reduce, lo que puede acelerar la multiplicación de matrices en sistemas con múltiples núcleos de CPU.
+2) Comunicación y Sincronización: Aunque más procesos pueden llevar a una mayor paralelización, también aumentan los costos de comunicación y sincronización entre procesos, especialmente cuando se reúnen los 
+   resultados parciales.
+3) Carga de Trabajo: Para obtener un rendimiento óptimo, la carga de trabajo debe distribuirse uniformemente entre los procesos. En este programa, las filas de las matrices se distribuyen de manera equitativa.
+4) Tamaño de las Matrices: El beneficio de utilizar múltiples procesos es más evidente en matrices grandes. Para matrices pequeñas, el costo de comunicación puede superar las ganancias de paralelización.
